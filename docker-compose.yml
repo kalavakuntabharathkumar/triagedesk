@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      MONGODB_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: triagedesk
+      LLM_ENABLED: "false"
+    depends_on: [mongo]
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: [triage_data:/data/db]
+volumes:
+  triage_data:
